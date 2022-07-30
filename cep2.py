@@ -9,15 +9,17 @@ def valida_CEP(CEP):
     else:
         return False
 
-def data_CEP(CEP):
+def busca_CEP(CEP):
     if valida_CEP(CEP):
-        #webbrowser.open('http://www.viacep.com.br/ws/%s/json/' %(CEP))
-        data_JSON = requests.get("http://www.viacep.com.br/ws/%s/json/" %(CEP))
-        data_dic = data_JSON.text
-        print(type(data_dic))        
+        url = requests.get('http://www.viacep.com.br/ws/%s/json/' %(CEP))
+        text = url.text
+        #data = json.loads(text)
+        data = json.dump(text,indent=4)
+        print(data)       
     else:
         print('Digite somente os oito dígitos do CEP')
 
-    
+while True:
     CEP = input("CEP: ")
-    data_CEP(CEP)
+    busca_CEP(CEP)   
+    
