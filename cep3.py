@@ -21,7 +21,7 @@ def call_viacep(cep):
     except Exception as e:
         return {'error': e} 
 
-def handle_cep(cep: str):
+def handle_cep(cep: str) -> str:
     
     cep = prepare_cep(cep)
 
@@ -29,12 +29,11 @@ def handle_cep(cep: str):
 
         endereco = call_viacep(cep)
         if not 'error' in endereco:
-            print("\n",endereco)
-        else:
-            print("\n",endereco['error'])
+            return endereco
 
-    else:
-        print("Errouu!")
+        return endereco['error']
+
+    return "Errouu!"
 
 
 def main():
@@ -50,7 +49,8 @@ def main():
             continua = False
             continue
 
-        handle_cep(cep)
+        response = handle_cep(cep)
+        print('\n', response)
 
 
 if "__main__" == __name__:
